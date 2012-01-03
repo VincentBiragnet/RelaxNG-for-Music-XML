@@ -1,1 +1,20 @@
 ## About RelaxNG schemas for musicXML
+
+Relax NG version of the specifiction found at : http://www.recordare.com/musicxml/specification.
+
+You'll find :
+
+1° An XML Syntax version (in rng directory).
+2° A compact syntax version (in rnc directory).
+
+The compact version has been generated from the XML syntax version.
+
+You can find copyrights in the schema files.
+
+
+The schemas has been test against to "test suites" that can be found at the following URLs:
+
+1° http://lilypond.org/doc/v2.12/input/regression/musicxml/collated-files
+2° http://www.recordare.com/sites/default/files/xmlsamples.zip
+
+
