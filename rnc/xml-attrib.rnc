@@ -1,0 +1,100 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace db = "http://docbook.org/ns/docbook"
+namespace dcterms = "http://purl.org/dc/terms/"
+namespace its = "http://www.w3.org/2005/11/its"
+namespace rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+namespace rdfs = "http://www.w3.org/2000/01/rdf-schema#"
+namespace sch = "http://purl.oclc.org/dsdl/schematron"
+namespace xs = "http://www.w3.org/2001/XMLSchema"
+namespace z = "http://www.daisy.org/ns/z3986/annotations/#"
+
+rdf:RDF [
+  "\x{a}" ~
+  "        "
+  rdf:Description [
+    rdf:about = "."
+    xml:lang = "en"
+    "\x{a}" ~
+    "            "
+    dcterms:title [ "The core attributes module " ]
+    "\x{a}" ~
+    "            "
+    dcterms:description [
+      "This module defines the xml.id , xml.space , xml.base and class attributes that constitute the core attributes collection that is available for all elements in a profile's core markup model. "
+    ]
+    "\x{a}" ~
+    "            "
+    z:info [
+      "The core attributes are all optional, but the module activation process provides a mechanism to require some or all of the attributes."
+    ]
+    "\x{a}" ~
+    "            "
+    dcterms:publisher [ "DAISY Consortium" ]
+    "\x{a}" ~
+    "            "
+    dcterms:license [ rdf:resource = "{LICENSE_TODO}" ]
+    "\x{a}" ~
+    "            "
+    dcterms:creator [ "Markus Gylling" ]
+    "\x{a}" ~
+    "            "
+    dcterms:issued [ "2009-12-21" ]
+    "\x{a}" ~
+    "        "
+  ]
+  "\x{a}" ~
+  "    "
+]
+div {
+  xml.id.attrib =
+    
+    ## The xml:id attribute specifies a unique identifier for the element. No two elements in an xml document can have the same xml:id, including inside components that are appended to the primary document by xinclude statements or other means. The semantics of this attribute are defined by refXMLID . 
+    attribute xml:id { ID.datatype }
+}
+div {
+  xml.space.attrib =
+    
+    ## The xml:space attribute indicates whether the whitespace within an element is significant. The semantics of this attribute are defined by refXML . Refer to White Space Handling for more information. 
+    attribute xml:space { xml.space.attrib.content }
+  xml.space.attrib.content =
+    
+    ## Signals that applications' default white-space processing modes are acceptable for this element. 
+    "default"
+    | 
+      ## Signals the intent that applications preserve white space for this element. 
+      "preserve"
+}
+div {
+  xml.base.attrib =
+    
+    ## The xml:base attribute specifies a base URI to use for resolving relative URI references, for instances where the base URI of the document or external entity is not appropriate. The semantics and behaviors of this attribute are defined by refXMLBase . 
+    attribute xml:base { xml.base.attrib.content }
+  xml.base.attrib.content = URI.datatype
+}
+div {
+  z3986.class.attrib =
+    
+    ## The class attribute provides the ability to express general classifying or commonality between elements. This attribute inherits all the fundamental properties of the (X)HTML class attribute and is usable in the context of CSS styling . The class attribute is not used to inflect semantics or structure on elements or their contents. Refer to the role attribute for more information on how to layer semantic meaning on elements. 
+    attribute class { NMTOKENS.datatype }
+}
+div {
+  
+  ## A set of attributes, initially consisting of the xml.id , xml.space , xml.base and class attributes. 
+  z3986.Core.attrib &=
+    xml.id.attrib?,
+    xml.space.attrib?,
+    xml.base.attrib?,
+    z3986.class.attrib?,
+    z3986.Core.contrib.attrib
+  
+  ## A pattern for external (to this module) contributions to the z3986.Core.attrib pattern. 
+  z3986.Core.contrib.attrib &= empty
+  
+  ## A convenience pattern. 
+  z3986.Core.attrib.xml.id.required &=
+    xml.id.attrib,
+    xml.space.attrib?,
+    xml.base.attrib?,
+    z3986.class.attrib?,
+    z3986.Core.contrib.attrib
+}

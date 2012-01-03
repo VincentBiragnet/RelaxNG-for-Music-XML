@@ -1,0 +1,131 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace db = "http://docbook.org/ns/docbook"
+namespace dcterms = "http://purl.org/dc/terms/"
+namespace rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+namespace rdfs = "http://www.w3.org/2000/01/rdf-schema#"
+namespace sch = "http://purl.oclc.org/dsdl/schematron"
+namespace xlink = "http://www.w3.org/1999/xlink"
+namespace xs = "http://www.w3.org/2001/XMLSchema"
+namespace z = "http://www.daisy.org/ns/z3986/annotations/#"
+
+rdf:RDF [
+  "\x{a}" ~
+  "        "
+  rdf:Description [
+    rdf:about = "."
+    xml:lang = "en"
+    "\x{a}" ~
+    "            "
+    dcterms:title [ "The XLink attributes module " ]
+    "\x{a}" ~
+    "            "
+    dcterms:description [
+      "This module defines the xlink attributes collection, as defined by W3C refXLink . "
+    ]
+    "\x{a}" ~
+    "            "
+    z:info [
+      "Compliant Z39.86-AI processing agents must comply to the [[http://www.w3.org/TR/xlink11/#app-reqs-simple Simple Conformance]] definition in XLink."
+    ]
+    "\x{a}" ~
+    "            "
+    z:info [
+      "Note also that in its default state, the {[[#xlink.attrib]]} attribute collection does not include the {xlink:role} and {xlink:arcrole} attributes, as the functionality of these attributes is covered by the globally available {[[#Rdfa.attrib]]} and {[[#z3986.role.attrib]]}."
+    ]
+    "\x{a}" ~
+    "            "
+    dcterms:publisher [ "DAISY Consortium" ]
+    "\x{a}" ~
+    "            "
+    dcterms:license [ rdf:resource = "{LICENSE_TODO}" ]
+    "\x{a}" ~
+    "            "
+    dcterms:creator [ "Markus Gylling" ]
+    "\x{a}" ~
+    "            "
+    dcterms:issued [ "2009-12-21" ]
+    "\x{a}" ~
+    "            "
+    dcterms:rights [
+      "Copyright 1998-2010 W3C (MIT, ERCIM, Keio), All Rights Reserved. Permission to use, copy, modify and distribute the XLink schema and its accompanying documentation for any purpose and without fee is hereby granted in perpetuity, provided that the above copyright notice and this paragraph appear in all copies."
+    ]
+    "\x{a}" ~
+    "            "
+    dcterms:rightsHolder [
+      "World Wide Web Consortium (http://www.w3.org)"
+    ]
+    "\x{a}" ~
+    "        "
+  ]
+  "\x{a}" ~
+  "    "
+]
+xlink.href.attrib =
+  
+  ## Identifies a link target with a URI 
+  attribute xlink:href { URI.datatype }
+xlink.type.attrib =
+  
+  ## Identifies the XLink link type In any Z39.86-AI profile and as defined by XLink Simple Conformance , the xlink type simple is the implied xlink type, and does therefore not need to be expressed literally using the xlink.type attribute. 
+  attribute xlink:type {
+    
+    ## The XLink simple link type 
+    "simple"
+  }
+xlink.role.attrib =
+  
+  ## Identifies the XLink role of the link 
+  attribute xlink:role { URI.datatype }
+xlink.arcrole.attrib =
+  
+  ## Identifies the XLink arcrole of the link 
+  attribute xlink:arcrole { URI.datatype }
+xlink.title.attrib =
+  
+  ## Identifies the XLink title of the link. 
+  attribute xlink:title { Characters.datatype }
+xlink.show.attrib =
+  
+  ## Identifies the XLink show behavior of the link 
+  attribute xlink:show { xlink.show.enumeration }
+xlink.show.enumeration =
+  
+  ## An application traversing to the ending resource should load it in a new window, frame, pane, or other relevant presentation context. 
+  "new"
+  | 
+    ## An application traversing to the ending resource should load the resource in the same window, frame, pane, or other relevant presentation context in which the starting resource was loaded. 
+    "replace"
+  | 
+    ## An application traversing to the ending resource should load its presentation in place of the presentation of the starting resource. 
+    "embed"
+  | 
+    ## The behavior of an application traversing to the ending resource is unconstrained by XLink. The application should look for other markup present in the link to determine the appropriate behavior. 
+    "other"
+  | 
+    ## The behavior of an application traversing to the ending resource is unconstrained by this specification. No other markup is present to help the application determine the appropriate behavior. 
+    "none"
+xlink.actuate.attrib =
+  
+  ## Identifies the XLink actuate behavior of the link 
+  attribute xlink:actuate { xlink.actuate.enumeration }
+xlink.actuate.enumeration =
+  
+  ## An application should traverse to the ending resource immediately on loading the starting resource. 
+  "onLoad"
+  | 
+    ## An application should traverse from the starting resource to the ending resource only on a post-loading event triggered for the purpose of traversal. 
+    "onRequest"
+  | 
+    ## The behavior of an application traversing to the ending resource is unconstrained by this specification. The application should look for other markup present in the link to determine the appropriate behavior. 
+    "other"
+  | 
+    ## The behavior of an application traversing to the ending resource is unconstrained by this specification. No other markup is present to help the application determine the appropriate behavior. 
+    "none"
+
+## The W3C refXLink attributes collection. 
+xlink.attrib =
+  xlink.href.attrib
+  & xlink.type.attrib?
+  & xlink.title.attrib?
+  & xlink.show.attrib?
+  & xlink.actuate.attrib?

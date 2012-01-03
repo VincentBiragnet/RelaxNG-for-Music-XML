@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar ns="http://www.daisy.org/ns/z3986/authoring/" xmlns="http://relaxng.org/ns/structure/1.0" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:z="http://www.daisy.org/ns/z3986/annotations/#" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:db="http://docbook.org/ns/docbook" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+    <rdf:RDF>
+        <rdf:Description rdf:about="." xml:lang="en">
+            <dcterms:title>The XLink attributes module </dcterms:title>
+            <dcterms:description>This module defines the xlink attributes collection, as defined by W3C refXLink . </dcterms:description>
+            <z:info xmlns:xlink="http://www.w3.org/1999/xlink">Compliant Z39.86-AI processing agents must comply to the [[http://www.w3.org/TR/xlink11/#app-reqs-simple Simple Conformance]] definition in XLink.</z:info>
+            <z:info xmlns:xlink="http://www.w3.org/1999/xlink">Note also that in its default state, the {[[#xlink.attrib]]} attribute collection does not include the {xlink:role} and {xlink:arcrole} attributes, as the functionality of these attributes is covered by the globally available {[[#Rdfa.attrib]]} and {[[#z3986.role.attrib]]}.</z:info>
+            <dcterms:publisher xmlns:xlink="http://www.w3.org/1999/xlink">DAISY Consortium</dcterms:publisher>
+            <dcterms:license rdf:resource="{LICENSE_TODO}" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+            <dcterms:creator xmlns:xlink="http://www.w3.org/1999/xlink">Markus Gylling</dcterms:creator>
+            <dcterms:issued xmlns:xlink="http://www.w3.org/1999/xlink">2009-12-21</dcterms:issued>
+            <dcterms:rights xmlns:xlink="http://www.w3.org/1999/xlink">Copyright 1998-2010 W3C (MIT, ERCIM, Keio), All Rights Reserved. Permission to use, copy, modify and distribute the XLink schema and its accompanying documentation for any purpose and without fee is hereby granted in perpetuity, provided that the above copyright notice and this paragraph appear in all copies.</dcterms:rights>
+            <dcterms:rightsHolder xmlns:xlink="http://www.w3.org/1999/xlink">World Wide Web Consortium (http://www.w3.org)</dcterms:rightsHolder>
+        </rdf:Description>
+    </rdf:RDF>
+    <define name="xlink.href.attrib" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <attribute name="href" ns="http://www.w3.org/1999/xlink">
+            <a:documentation>Identifies a link target with a URI </a:documentation>
+            <ref name="URI.datatype"/>
+        </attribute>
+    </define>
+    <define name="xlink.type.attrib" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <attribute name="type" ns="http://www.w3.org/1999/xlink">
+            <a:documentation>Identifies the XLink link type In any Z39.86-AI profile and as defined by XLink Simple Conformance , the xlink type simple is the implied xlink type, and does therefore not need to be expressed literally using the xlink.type attribute. </a:documentation>
+            <value>simple</value>
+            <a:documentation>The XLink simple link type </a:documentation>
+        </attribute>
+    </define>
+    <define name="xlink.role.attrib" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <attribute name="role" ns="http://www.w3.org/1999/xlink">
+            <a:documentation>Identifies the XLink role of the link </a:documentation>
+            <ref name="URI.datatype"/>
+        </attribute>
+    </define>
+    <define name="xlink.arcrole.attrib" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <attribute name="arcrole" ns="http://www.w3.org/1999/xlink">
+            <a:documentation>Identifies the XLink arcrole of the link </a:documentation>
+            <ref name="URI.datatype"/>
+        </attribute>
+    </define>
+    <define name="xlink.title.attrib" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <attribute name="title" ns="http://www.w3.org/1999/xlink">
+            <a:documentation>Identifies the XLink title of the link. </a:documentation>
+            <ref name="Characters.datatype"/>
+        </attribute>
+    </define>
+    <define name="xlink.show.attrib" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <attribute name="show" ns="http://www.w3.org/1999/xlink">
+            <a:documentation>Identifies the XLink show behavior of the link </a:documentation>
+            <ref name="xlink.show.enumeration"/>
+        </attribute>
+    </define>
+    <define name="xlink.show.enumeration" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <choice>
+            <value>new</value>
+            <a:documentation>An application traversing to the ending resource should load it in a new window, frame, pane, or other relevant presentation context. </a:documentation>
+            <value>replace</value>
+            <a:documentation>An application traversing to the ending resource should load the resource in the same window, frame, pane, or other relevant presentation context in which the starting resource was loaded. </a:documentation>
+            <value>embed</value>
+            <a:documentation>An application traversing to the ending resource should load its presentation in place of the presentation of the starting resource. </a:documentation>
+            <value>other</value>
+            <a:documentation>The behavior of an application traversing to the ending resource is unconstrained by XLink. The application should look for other markup present in the link to determine the appropriate behavior. </a:documentation>
+            <value>none</value>
+            <a:documentation>The behavior of an application traversing to the ending resource is unconstrained by this specification. No other markup is present to help the application determine the appropriate behavior. </a:documentation>
+        </choice>
+    </define>
+    <define name="xlink.actuate.attrib" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <attribute name="actuate" ns="http://www.w3.org/1999/xlink">
+            <a:documentation>Identifies the XLink actuate behavior of the link </a:documentation>
+            <ref name="xlink.actuate.enumeration"/>
+        </attribute>
+    </define>
+    <define name="xlink.actuate.enumeration" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <choice>
+            <value>onLoad</value>
+            <a:documentation>An application should traverse to the ending resource immediately on loading the starting resource. </a:documentation>
+            <value>onRequest</value>
+            <a:documentation>An application should traverse from the starting resource to the ending resource only on a post-loading event triggered for the purpose of traversal. </a:documentation>
+            <value>other</value>
+            <a:documentation>The behavior of an application traversing to the ending resource is unconstrained by this specification. The application should look for other markup present in the link to determine the appropriate behavior. </a:documentation>
+            <value>none</value>
+            <a:documentation>The behavior of an application traversing to the ending resource is unconstrained by this specification. No other markup is present to help the application determine the appropriate behavior. </a:documentation>
+        </choice>
+    </define>
+    <define name="xlink.attrib">
+        <a:documentation>The W3C refXLink attributes collection. </a:documentation>
+        <interleave xmlns:xlink="http://www.w3.org/1999/xlink">
+            <ref name="xlink.href.attrib"/>
+            <optional>
+                <ref name="xlink.type.attrib"/>
+            </optional>
+            <optional>
+                <ref name="xlink.title.attrib"/>
+            </optional>
+            <optional>
+                <ref name="xlink.show.attrib"/>
+            </optional>
+            <optional>
+                <ref name="xlink.actuate.attrib"/>
+            </optional>
+        </interleave>
+    </define>
+</grammar>

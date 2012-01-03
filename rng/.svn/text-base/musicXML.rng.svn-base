@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+         xmlns="http://relaxng.org/ns/structure/1.0"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+   <start>
+      <choice>
+         <ref name="score-partwiseDEF"/>
+         <ref name="score-timewiseDEF"/>
+      </choice>
+   </start>
+   <define name="score-partwiseDEF">
+      <element name="score-partwise">
+         <a:documentation>The score-partwise element is the root element for a partwise MusicXML score. It includes a score-header group followed by a series of parts with measures inside. The document-attributes attribute group includes the version attribute.</a:documentation>
+         <ref name="score-headerDEF"/>
+         <empty/>
+         <empty/>
+      </element>
+   </define>
+   <define name="score-timewiseDEF">
+      <element name="score-timewise">
+         <a:documentation>The score-timewise element is the root element for a timewise MusicXML score. It includes a score-header group followed by a series of measures with parts inside. The document-attributes attribute group includes the version attribute.</a:documentation>
+         <ref name="score-headerDEF"/>
+         <empty/>
+         <empty/>
+      </element>
+   </define>
+   <define name="editorialDEF">
+      <a:documentation>The editorial group specifies editorial information for a musical element.</a:documentation>
+      <ref name="footnoteDEF"/>
+      <ref name="levelDEF"/>
+   </define>
+   <define name="editorial-voiceDEF">
+      <a:documentation>The editorial-voice group supports the common combination of editorial and voice information for a musical element.</a:documentation>
+      <ref name="footnoteDEF"/>
+      <ref name="levelDEF"/>
+      <ref name="voiceDEF"/>
+   </define>
+   <define name="editorial-voice-directionDEF">
+      <a:documentation>The editorial-voice-direction group supports the common combination of editorial and voice information for a direction element. It is separate from the editorial-voice element because extensions and restrictions might be different for directions than for the note and forward elements.</a:documentation>
+      <ref name="footnoteDEF"/>
+      <ref name="levelDEF"/>
+      <ref name="voiceDEF"/>
+   </define>
+   <define name="footnoteDEF">
+      <a:documentation>The footnote element specifies editorial information that appears in footnotes in the printed score. It is defined within a group due to its multiple uses within the MusicXML schema.</a:documentation>
+      <empty/>
+   </define>
+   <define name="levelDEF">
+      <a:documentation>The level element specifies editorial information for different MusicXML elements. It is defined within a group due to its multiple uses within the MusicXML schema.</a:documentation>
+      <empty/>
+   </define>
+   <define name="staffDEF">
+      <a:documentation>The staff element is defined within a group due to its use by both notes and direction elements.</a:documentation>
+      <empty/>
+   </define>
+   <define name="tuningDEF">
+      <a:documentation>The tuning group contains the sequence of elements common to the staff-tuning and accord elements.</a:documentation>
+      <empty/>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="voiceDEF">
+      <a:documentation>The voice is used to distinguish between multiple voices (what MuseData calls tracks) in individual parts. It is defined within a group due to its multiple uses within the MusicXML schema.</a:documentation>
+      <empty/>
+   </define>
+   <define name="non-traditional-keyDEF">
+      <a:documentation>The non-traditional-key group represents a single alteration within a non-traditional key signature. A sequence of these groups makes up a non-traditional key signature</a:documentation>
+      <empty/>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="slashDEF">
+      <a:documentation>The slash group combines elements used for more complete specification of the slash and beat-repeat measure-style elements. They have the same values as the type and dot elements, and define what the beat is for the display of repetition marks. If not present, the beat is based on the current time signature.</a:documentation>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="time-signatureDEF">
+      <a:documentation>Time signatures are represented by the beats element for the numerator and the beat-type element for the denominator.</a:documentation>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="traditional-keyDEF">
+      <a:documentation>The traditional-key group represents a traditional key signature using the cycle of fifths.</a:documentation>
+      <empty/>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="beat-unitDEF">
+      <a:documentation>The beat-unit group combines elements used repeatedly in the metronome element to specify a note within a metronome mark.</a:documentation>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="harmony-chordDEF">
+      <a:documentation>A harmony element can contain many stacked chords (e.g. V of II). A sequence of harmony-chord groups is used for this type of secondary function, where V of II would be represented by a harmony-chord with a V function followed by a harmony-chord with a II function.
+	
+A root is a pitch name like C, D, E, where a function is an indication like I, II, III. It is an either/or choice to avoid data inconsistency.</a:documentation>
+      <empty/>
+      <empty/>
+      <empty/>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="all-marginsDEF">
+      <a:documentation>The all-margins group specifies both horizontal and vertical margins in tenths.</a:documentation>
+      <ref name="left-right-marginsDEF"/>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="layoutDEF">
+      <a:documentation>The layout group specifies the sequence of page, system, and staff layout elements that is common to both the defaults and print elements.</a:documentation>
+      <empty/>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="left-right-marginsDEF">
+      <a:documentation>The left-right-margins group specifies horizontal margins in tenths.</a:documentation>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="durationDEF">
+      <a:documentation>The duration element is defined within a group due to its uses within the note, figure-bass, backup, and forward elements.</a:documentation>
+      <empty/>
+   </define>
+   <define name="display-step-octaveDEF">
+      <a:documentation>The display-step-octave group contains the sequence of elements used by both the rest and unpitched elements. This group is used to place rests and unpitched elements on the staff without implying that these elements have pitch. Positioning follows the current clef. If percussion clef is used, the display-step and display-octave elements are interpreted as if in treble clef, with a G in octave 4 on line 2. If not present, the note is placed on the middle line of the staff, generally used for a one-line staff.</a:documentation>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="full-noteDEF">
+      <a:documentation>The full-note group is a sequence of the common note elements between cue/grace notes and regular (full) notes: pitch, chord, and rest information, but not duration (cue and grace notes do not have duration encoded). Unpitched elements are used for unpitched percussion, speaking voice, and other musical elements lacking determinate pitch.</a:documentation>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="music-dataDEF">
+      <a:documentation>The music-data group contains the basic musical data that is either associated with a part or a measure, depending on whether the partwise or timewise hierarchy is used.</a:documentation>
+      <empty/>
+   </define>
+   <define name="part-groupDEF">
+      <a:documentation>The part-group element is defined within a group due to its multiple uses within the part-list element.</a:documentation>
+      <empty/>
+   </define>
+   <define name="score-headerDEF">
+      <a:documentation>The score-header group contains basic score metadata about the work and movement, score-wide defaults for layout and fonts, credits that appear on the first or following pages, and the part list.</a:documentation>
+      <empty/>
+      <empty/>
+      <empty/>
+      <empty/>
+      <empty/>
+      <empty/>
+      <empty/>
+   </define>
+   <define name="score-partDEF">
+      <a:documentation>The score-part element is defined within a group due to its multiple uses within the part-list element.</a:documentation>
+      <empty/>
+   </define>
+</grammar>

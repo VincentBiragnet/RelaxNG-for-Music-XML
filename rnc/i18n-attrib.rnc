@@ -1,0 +1,115 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace db = "http://docbook.org/ns/docbook"
+namespace dcterms = "http://purl.org/dc/terms/"
+namespace its = "http://www.w3.org/2005/11/its"
+namespace rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+namespace rdfs = "http://www.w3.org/2000/01/rdf-schema#"
+namespace sch = "http://purl.oclc.org/dsdl/schematron"
+namespace xs = "http://www.w3.org/2001/XMLSchema"
+namespace z = "http://www.daisy.org/ns/z3986/annotations/#"
+
+rdf:RDF [
+  "\x{a}" ~
+  "        "
+  rdf:Description [
+    rdf:about = "."
+    xml:lang = "en"
+    "\x{a}" ~
+    "            "
+    dcterms:title [ "The I18n module " ]
+    "\x{a}" ~
+    "            "
+    dcterms:description [
+      "This module defines the xml.lang , its.dir and its.translate attributes that constitute the I18n (Internationalization) attributes collection that is available for all elements in a profile's core markup model. "
+    ]
+    "\x{a}" ~
+    "            "
+    z:info [
+      "The I18n attributes are all optional, but the module activation process provides a mechanism to require some or all of the attributes locally or globally."
+    ]
+    "\x{a}" ~
+    "            "
+    dcterms:publisher [ "DAISY Consortium" ]
+    "\x{a}" ~
+    "            "
+    dcterms:license [ rdf:resource = "{LICENSE_TODO}" ]
+    "\x{a}" ~
+    "            "
+    dcterms:creator [ "Markus Gylling" ]
+    "\x{a}" ~
+    "            "
+    dcterms:issued [ "2009-12-21" ]
+    "\x{a}" ~
+    "            "
+    dcterms:rights [
+      "Copyright 1998-2008 W3C (MIT, ERCIM, Keio), All Rights Reserved. Permission to use, copy, modify and distribute the ITS schema and its accompanying documentation for any purpose and without fee is hereby granted in perpetuity, provided that the above copyright notice and this paragraph appear in all copies."
+    ]
+    "\x{a}" ~
+    "            "
+    dcterms:rightsHolder [
+      "World Wide Web Consortium (http://www.w3.org)"
+    ]
+    "\x{a}" ~
+    "        "
+  ]
+  "\x{a}" ~
+  "    "
+]
+div {
+  xml.lang.attrib =
+    
+    ## The xml:lang attribute identifies the natural or formal language in which the content is written. The semantics of this attribute are defined by refXML . Refer to Language Identification for more information. 
+    attribute xml:lang { xml.lang.attrib.content }
+  xml.lang.attrib.content |= LanguageIdentifier.datatype
+}
+div {
+  its.dir.attrib =
+    
+    ## The its:dir attribute specifies the base writing direction of the content. If omitted, the implicit value ltr (left-to-right) is assumed. The semantics of this attribute are defined by refITS . Refer to Directionality for more information. 
+    attribute its:dir { its.dir.attrib.content }
+  its.dir.attrib.content =
+    
+    ## The writing direction is left-to-right. This is the implicit value of this attribute. 
+    "ltr"
+    | 
+      ## The writing direction is right-to-left. 
+      "rtl"
+    | 
+      ## The writing direction is left-to-right override. 
+      "lro"
+    | 
+      ## The writing direction is right-to-left override. 
+      "rlo"
+}
+div {
+  its.translate.attrib =
+    
+    ## The its:translate attribute indicates whether the content of an element is translatable or not. If omitted, the implicit value yes is assumed. The semantics of this attribute are defined by refITS . Refer to Translate for more information. 
+    attribute its:translate { its.translate.attrib.content }
+  its.translate.attrib.content =
+    
+    ## The content is translatable. This is the default value of this attribute. 
+    "yes"
+    | 
+      ## The content is not translatable. 
+      "no"
+}
+div {
+  
+  ## A set of attributes, initially consisting of the xml.lang , its.dir and its.translate attributes. 
+  z3986.I18n.attrib &=
+    xml.lang.attrib?,
+    its.dir.attrib?,
+    its.translate.attrib?,
+    z3986.I18n.contrib.attrib
+  
+  ## A pattern for external (to this module) contributions to the z3986.I18n.attrib pattern. 
+  z3986.I18n.contrib.attrib &= empty
+  
+  ## A convenience pattern. 
+  z3986.I18n.attrib.xml.lang.required &=
+    xml.lang.attrib,
+    its.dir.attrib?,
+    its.translate.attrib?,
+    z3986.I18n.contrib.attrib
+}

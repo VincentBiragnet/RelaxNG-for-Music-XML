@@ -1,0 +1,168 @@
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace db = "http://docbook.org/ns/docbook"
+namespace dcterms = "http://purl.org/dc/terms/"
+namespace rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+namespace rdfs = "http://www.w3.org/2000/01/rdf-schema#"
+namespace sch = "http://purl.oclc.org/dsdl/schematron"
+namespace xs = "http://www.w3.org/2001/XMLSchema"
+namespace z = "http://www.daisy.org/ns/z3986/annotations/#"
+
+rdf:RDF [
+  "\x{a}" ~
+  "        "
+  rdf:Description [
+    rdf:about = "."
+    xml:lang = "en"
+    "\x{a}" ~
+    "            "
+    dcterms:title [ "The datatypes module " ]
+    "\x{a}" ~
+    "            "
+    dcterms:description [
+      "This module defines a set of core datatypes for reference globally. "
+    ]
+    "\x{a}" ~
+    "            "
+    dcterms:publisher [ "DAISY Consortium" ]
+    "\x{a}" ~
+    "            "
+    dcterms:license [ rdf:resource = "{LICENSE_TODO}" ]
+    "\x{a}" ~
+    "            "
+    dcterms:creator [ "Markus Gylling" ]
+    "\x{a}" ~
+    "            "
+    dcterms:issued [ "2009-12-21" ]
+    "\x{a}" ~
+    "        "
+  ]
+  "\x{a}" ~
+  "    "
+]
+
+## Datatypes defined in XML 1.0 
+div {
+  
+  ## An ID TokenizedType, as defined in section 3.3.1 of refXML . 
+  ID.datatype = xsd:ID
+  
+  ## An IDREF TokenizedType, as defined in section 3.3.1 of refXML . 
+  IDREF.datatype = xsd:IDREF
+  
+  ## A space-separated list of IDREF.datatype TokenizedTypes. 
+  IDREFS.datatype = xsd:IDREFS
+  
+  ## An NMTOKEN TokenizedType, as defined in section 3.3.1 of refXML . 
+  NMTOKEN.datatype = xsd:NMTOKEN
+  
+  ## A space-separated list of NMTOKEN.datatype TokenizedTypes. 
+  NMTOKENS.datatype = xsd:NMTOKENS
+  
+  ## A single character, as per section 2.2 of refXML . 
+  Character.datatype = xsd:string { length = "1" }
+  
+  ## A range (0..n) of characters, as per section 2.2 of refXML . 
+  Characters.datatype = text
+  
+  ## A language identifier, as per Language Identification in refXML . 
+  LanguageIdentifier.datatype =
+    xsd:language
+    | xsd:string { length = "0" }
+}
+
+## Datatypes defined in or derived from XSD datatypes 
+div {
+  
+  ## Specifies a value that must contain at least one non-whitespace character after whitespace normalization rules have been applied to the attribute value, as expressed through the XSD normalizedString datatype. 
+  NonEmptyString.datatype = xsd:normalizedString { pattern = ".+" }
+  
+  ## A date and/or time statement, expressed using any of the XSD gYear, gYearMonth, gMonthDay, gDay, gMonth, date, time or dateTime datatypes, or the Z39.86-defined TimeNoSeconds.datatype datatype. 
+  Time.datatype =
+    xsd:gYear
+    | xsd:gYearMonth
+    | xsd:gMonthDay
+    | xsd:gDay
+    | xsd:gMonth
+    | xsd:date
+    | xsd:time
+    | xsd:dateTime
+    | TimeNoSeconds.datatype
+  
+  ## A derivation of the XSD time datatype that only includes hour and minute specifications. The lexical expression is hh:mm. 
+  TimeNoSeconds.datatype = xsd:string { pattern = "\d\d:\d\d" }
+  
+  ## Date and time information, as defined by the dateTime type in refXSDDatatypes . 
+  Datetime.datatype = xsd:dateTime
+  
+  ## A non-negative integer. 
+  NonNegativeInteger.datatype =
+    xsd:nonNegativeInteger { pattern = "[0-9]+" }
+  
+  ## A positive integer. 
+  PositiveInteger.datatype = xsd:positiveInteger { pattern = "[0-9]+" }
+  
+  ## An integer. 
+  Integer.datatype = xsd:integer
+  
+  ## A Uniform Resource Identifier Reference, as defined by the anyURI type in refXSDDatatypes . 
+  URI.datatype = xsd:anyURI
+  
+  ## A space-separated list of URI.datatype s. 
+  URIs.datatype = list { URI.datatype+ }
+}
+div {
+  
+  ## A namespace qualified name as per refXMLNamespaces . 
+  QName.datatype = xsd:QName
+  
+  ## One or more whitespace separated QName.datatype s. 
+  QNames.datatype = list { xsd:QName+ }
+  
+  ## A prefixed QName.datatype . 
+  prefixedQName.datatype =
+    xsd:QName { pattern = "[\i-[:]][\c-[:]]*:[\i-[:]][\c-[:]]*" }
+}
+
+## ContentType and MediaType Datatypes 
+div {
+  
+  ## Media type, as per refRFC2046 . 
+  MediaType.datatype = text
+}
+
+## CSS Datatypes 
+div {
+  
+  ## A time value as defined in CSS 2.1 Times , e.g. 250ms, 3s. 
+  CSS.TimeValue.datatype = text
+}
+
+## CURIE Datatypes 
+div {
+  
+  ## A single CURIE, as defined in refRDFa . 
+  CURIE.datatype =
+    xsd:string {
+      pattern = "(([\i-[:]][\c-[:]]*)?:)?.+"
+      minLength = "1"
+    }
+  
+  ## A whitespace separated list of CURIE.datatype s. 
+  CURIEs.datatype = list { CURIE.datatype+ }
+  
+  ## A single safe CURIE, as defined in refRDFa . 
+  SafeCURIE.datatype =
+    xsd:string {
+      pattern = "\[(([\i-[:]][\c-[:]]*)?:)?.+\]"
+      minLength = "3"
+    }
+  
+  ## A whitespace separated list of SafeCURIE.datatype s. 
+  SafeCURIEs.datatype = list { SafeCURIE.datatype+ }
+  
+  ## A URI.datatype or a SafeCURIE.datatype . 
+  URIorSafeCURIE.datatype = URI.datatype | CURIE.datatype
+  
+  ## A whitespace separated list of URIorSafeCURIE.datatype s. 
+  URIorSafeCURIEs.datatype = list { URIorSafeCURIE.datatype+ }
+}
